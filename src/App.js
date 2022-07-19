@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Addbanner from "./components/Addbanner";
+import Addlogo from "./components/Addlogo";
+import Addteammember from "./components/Addteammember";
+import Allhome from "./components/Allhome";
+import DashBoard from "./components/DashBoard";
+import Editpage from "./components/Editpage";
+import Manageall from "./components/Manageall";
 
 function App() {
+  AOS.init();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Allhome />}></Route>
+        <Route path="/home" element={<Allhome />}></Route>
+        <Route path="/dashboard" element={<DashBoard />}>
+          <Route path="addlogo" element={<Addlogo />} />
+          <Route path="addbaner" element={<Addbanner />} />
+          <Route path="addmember" element={<Addteammember />} />
+          <Route path="manage" >
+            <Route path="manageall" element={<Manageall />}></Route>
+          </Route>
+        </Route>
+        <Route path="/edit/:id" element={<Editpage />}></Route>
+      </Routes>
     </div>
   );
 }
